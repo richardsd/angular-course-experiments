@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <app-game-control 
+        (playingGame)="playingGame($event)"
+      ></app-game-control>
+      <div class="row" *ngFor="let inc of increments">
+        <app-even 
+          *ngIf="inc % 2 === 0; else isOdd" 
+          [input]="inc"
+        ></app-even>
+        <ng-template #isOdd>
+          <app-odd 
+            [input]="inc"
+          ></app-odd>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
