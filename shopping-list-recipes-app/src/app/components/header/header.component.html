@@ -8,12 +8,12 @@
         <li><a href="#" (click)="navigateTo('recipes')">Recipes</a></li>
         <li><a href="#" (click)="navigateTo('shopping')">Shopping List</a></li>
       </ul>
-      <ul class="nav navbar navbar-right">
-        <li class="dropdown">
+      <ul class="nav navbar-right">
+        <li class="dropdown" data-toggle="dropdown" appDropdown>
           <a href="#" class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li class="dropdown">Save Data</li>
-            <li class="dropdown">Fetch Data</li>
+            <li class="dropdown"><a href="#">Save Data</a></li>
+            <li class="dropdown"><a href="#">Fetch Data</a></li>
           </ul>
         </li>
       </ul>
