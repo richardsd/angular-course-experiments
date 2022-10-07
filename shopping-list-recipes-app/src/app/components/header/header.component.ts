@@ -16,7 +16,6 @@ export class HeaderComponent implements OnInit {
   }
 
   navigateTo(page: string) {
-    console.log(page);
     this.pageChanged.emit(page);
   }
 
