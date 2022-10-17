@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form (ngSubmit)="onSubmit()" [formGroup]="subscriptionForm">
+        <div>
+          <label for="projectName">Project name:</label>
+          <input 
+            id="projectName"
+            type="text"
+            name="projectName"
+            class="form-control"
+            formControlName="projectName"
+            >
+            <p 
+              class="invalid" 
+              *ngIf="!subscriptionForm.get('projectName').valid && subscriptionForm.get('projectName').touched && subscriptionForm.get('projectName').errors && subscriptionForm.get('projectName').errors['forbiddenProjectName']"
+              >
+              Project name cannot be equal to "test"!
+            </p>
+            <p 
+              class="invalid" 
+              *ngIf="!subscriptionForm.get('projectName').valid && subscriptionForm.get('projectName').touched && subscriptionForm.get('projectName').errors && subscriptionForm.get('projectName').errors['required']"
+              >
+              Project name cannot be empty!
+            </p>
+        </div>
+        <div>
+          <label for="email">Email: </label>
+          <input 
+            id="email" 
+            type="email" 
+            name="email"
+            class="form-control"
+            formControlName="email">
+          <p 
+            class="invalid" 
+            *ngIf="!subscriptionForm.get('email').valid && subscriptionForm.get('email').touched"
+            >
+            Please type a valid email!
+          </p>
+        </div>
+        <div>
+          <label for="subscription">Subscription:</label>
+          <select 
+            id="subscription" 
+            name="subscription" 
+            class="form-control"
+            formControlName="subscription">
+            <option value="basic">Basic</option>
+            <option value="advanced">Advanced</option>
+            <option value="pro">Pro</option>
+          </select>
+        </div>
+        <h5
+          class="invalid" 
+          *ngIf="!subscriptionForm.valid && subscriptionForm.touched">
+          Form is invalid, please review your input!
+        </h5>
+        <button 
+          class="btn btn-primary" 
+          type="submit"
+          [disabled]="!subscriptionForm.valid"
+          >Submit</button>
+        </form>
+    </div>
+  </div>
+  <div class="row" *ngIf="submitted">
+    <p>Project name: {{ subscription.name }}</p>
+    <p>Email: {{ subscription.email }}</p>
+    <p>Subscription type: {{ subscription.type }}</p>
+  </div>
+</div>
