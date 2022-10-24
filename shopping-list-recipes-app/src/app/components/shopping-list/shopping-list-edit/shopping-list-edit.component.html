@@ -1,20 +1,76 @@
 <div class="row">
   <div class="col-xs-12">
-    <form>
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
       <div class="row">
         <div class="col-sm-5 form-group">
           <label for="name">Name</label>
-          <input type="text" id="name" class="form-control" #nameInput>
+          <input
+            type="text"
+            id="name"
+            class="form-control"
+            name="name"
+            ngModel
+            #name="ngModel"
+            required
+          />
+          <span *ngIf="!name.valid && name.touched" class="invalid"
+            >Ingredient name cannot be empty!</span
+          >
         </div>
         <div class="col-sm-2 form-group">
           <label for="amount">Amount</label>
-          <input type="number" id="amount" class="form-control" #amountInput>
+          <input
+            type="number"
+            id="amount"
+            class="form-control"
+            name="amount"
+            ngModel
+            #amount="ngModel"
+            min="1"
+            required
+          />
+          <span
+            *ngIf="
+              !amount.valid &&
+              amount.touched &&
+              amount.errors &&
+              amount.errors['required']
+            "
+            class="invalid"
+            >Amount cannot be empty!</span
+          >
+          <span
+            *ngIf="
+              !amount.valid &&
+              amount.touched &&
+              amount.errors &&
+              amount.errors['min']
+            "
+            class="invalid"
+            >Amount value should be higher than 0!</span
+          >
         </div>
-          <div class="col-xs-12">
-            <button class="btn btn-success" type="submit" (click)="onIngredientAdd($event)">Add</button>
-            <button class="btn btn-danger" type="button">Delete</button>
-            <button class="btn btn-primary" type="button" (click)="onClear()">Clear</button>
-          </div>
+        <div class="col-xs-12">
+          <button class="btn btn-success" type="submit" [disabled]="!f.valid">
+            {{ editMode ? "Update" : "Add" }}
+          </button>
+          <button
+            class="btn btn-danger"
+            type="button"
+            *ngIf="editMode"
+            (click)="deleteIngredient()"
+          >
+            Delete
+          </button>
+          <button
+            class="btn btn-primary"
+            type="button"
+            (click)="onClear()"
+            [disabled]="!f.dirty"
+          >
+            Clear
+          </button>
+        </div>
       </div>
     </form>
   </div>

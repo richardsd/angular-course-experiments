@@ -16,6 +16,7 @@ import { HomeComponent } from './components/home/home.component';
 import { RecipeService } from './components/recipes/recipe.service';
 import { RecipeEmptyItemComponent } from './components/recipes/recipe-list/recipe-item/recipe-empty-item/recipe-empty-item.component';
 import { RecipeEditComponent } from './components/recipes/recipe-edit/recipe-edit.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,8 @@ import { RecipeEditComponent } from './components/recipes/recipe-edit/recipe-edi
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule
   ],
   providers: [RecipeService, ShoppingListService],

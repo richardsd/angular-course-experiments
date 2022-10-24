@@ -5,6 +5,7 @@ import { Recipe } from 'src/app/model/recipe';
 
 @Injectable()
 export class RecipeService {
+  recipesChanged = new Subject<Recipe[]>();
   recipeSelected = new Subject<Recipe>();
 
   private recipes: Recipe[] = [
@@ -40,5 +41,26 @@ export class RecipeService {
 
   getRecipeById(id: number): Recipe | undefined {
     return this.recipes.find(recipe => recipe.id === id);
+  }
+
+  addRecipe(recipe: Recipe) {
+    if (recipe.id === -1) {
+      recipe.id = this.recipes.length + 1;
+    }
+    this.recipes.push(recipe);
+    this.recipesChanged.next(this.getRecipes());
+  }
+
+  updateRecipe(index: number, recipe: Recipe) {
+    this.recipes[index - 1] = recipe;
+    this.recipesChanged.next(this.getRecipes());
+  }
+
+  deleteRecipe(id: number) {
+    const index = this.recipes.findIndex(recipe => recipe.id === id);
+    if (index > -1) {
+      this.recipes.splice(index, 1);
+      this.recipesChanged.next(this.getRecipes());
+    }
   }
 }

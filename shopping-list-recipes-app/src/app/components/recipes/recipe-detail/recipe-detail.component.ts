@@ -17,6 +17,7 @@ export class RecipeDetailComponent implements OnInit {
   constructor(
     private recipeService: RecipeService,
     private shoppingListService: ShoppingListService, 
+    private router: Router,
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -31,4 +32,10 @@ export class RecipeDetailComponent implements OnInit {
     this.shoppingListService.addIngredients(this.recipe!.ingredients);
   }
 
+  onRecipeDelete() {
+    if (this.recipe) {
+      this.recipeService.deleteRecipe(this.recipe.id);
+      this.router.navigate(['..'], { relativeTo: this.route });
+    }
+  }
 }
